@@ -51,6 +51,16 @@ when "debian", "ubuntu"
   # installs the required setsid command -- should be there by default but just in case
   package "util-linux"
   package "rabbitmq-server"
+  
+  # the initscript is broken (has no runlevels defined); therefore we provide a patch
+  cookbook_file "/tmp/rabbitmq-server.patch" do
+    source "rabbitmq-server.patch"
+  end
+  execute "patch /etc/init.d/rabbitmq-server /tmp/rabbitmq-server.patch" do
+    not_if do
+      open('/etc/init.d/rabbitmq-server').read =~ /^# Default-Start:\s+2 3 4 5\n# Default-Stop:\s+0 1 6$/m
+    end
+  end
 
 when "redhat", "centos", "scientific", "amazon", "fedora"
 

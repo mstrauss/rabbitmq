@@ -1,0 +1,13 @@
+--- rabbitmq-server	2010-08-01 15:47:46.000000000 +0200
++++ rabbitmq-server	2012-08-28 01:55:00.000000000 +0200
+@@ -10,8 +10,8 @@
+ # Provides:          rabbitmq-server
+ # Required-Start:    $remote_fs $network
+ # Required-Stop:     $remote_fs $network
+-# Default-Start:
+-# Default-Stop:
++# Default-Start:     2 3 4 5
++# Default-Stop:      0 1 6
+ # Description:       RabbitMQ broker
+ # Short-Description: Enable AMQP service provided by RabbitMQ broker
+ ### END INIT INFO
